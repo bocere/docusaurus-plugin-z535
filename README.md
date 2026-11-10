@@ -90,6 +90,11 @@ word DANGER, above a white message panel with the three labeled parts.
 </SafetyAlert>
 ```
 
+Dark themes do not change the colors.
+
+![Danger icon in a dark theme][danger-dark-theme.png]
+
+
 Choose the type from the hazard. Don't pick it for how it looks.
 
 | `type` | Use when… |
