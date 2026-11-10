@@ -27,46 +27,46 @@ word DANGER, above a white message panel with the three labeled parts.
 
 1. Clone this repository.
 
-```bash
-git clone https://github.com/bocere/docusaurus-plugin-z535
-```
+  ```bash
+  git clone https://github.com/bocere/docusaurus-plugin-z535
+  ```
 
-1. Copy the folder to your site.
+2. Copy the folder to your site.
 
-```bash
-cp docusaurus-plugin-z535 /<path-to-site>/plugins
-```
+  ```bash
+  cp docusaurus-plugin-z535 /<path-to-site>/plugins
+  ```
 
-1. Add it to `docusaurus.config.js`:
+3. Add it to `docusaurus.config.js`:
 
-```js
-const config: Config = {
-  ...
-  plugins: ['./plugins/docusaurus-plugin-z535'],
-  ...
-};
-```
+  ```js
+  const config: Config = {
+    ...
+    plugins: ['./plugins/docusaurus-plugin-z535'],
+    ...
+  };
+  ```
 
-1. Create or add the following to the `src/theme/MDXComponents.js` file.
+4. Create or add the following to the `src/theme/MDXComponents.js` file.
 
-```mdx
-import MDXComponents from '@theme-original/MDXComponents';
-import SafetyAlert, {
-  Hazard,
-  Consequence,
-  Avoidance,
-} from '@theme/Z535SafetyAlert';
-
-export default {
-  ...MDXComponents,
-  SafetyAlert,
-  Hazard,
-  Consequence,
-  Avoidance,
-};
-```
-
-1. Restart the site.
+  ```mdx
+  import MDXComponents from '@theme-original/MDXComponents';
+  import SafetyAlert, {
+    Hazard,
+    Consequence,
+    Avoidance,
+  } from '@theme/Z535SafetyAlert';
+  
+  export default {
+    ...MDXComponents,
+    SafetyAlert,
+    Hazard,
+    Consequence,
+    Avoidance,
+  };
+  ```
+  
+5. Restart the site.
 
 ## Usage
 
