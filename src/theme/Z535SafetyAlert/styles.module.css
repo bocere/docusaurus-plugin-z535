@@ -1,0 +1,128 @@
+/*
+ * sRGB approximations of the ANSI Z535.1 safety colors referenced by
+ * Z535.4/Z535.6. Pantone spot colors don't convert losslessly to screen
+ * RGB — treat these as close digital approximations, not certified
+ * print-matching values.
+ *
+ *   Safety Red    -> PMS 186 C -> #BD2024  (DANGER)
+ *   Safety Orange -> PMS 151 C -> #FF7900  (WARNING)
+ *   Safety Yellow -> PMS 116 C -> #FFE100  (CAUTION)
+ *   Safety Blue   -> PMS 285 C -> #004488  (NOTICE word panel, per
+ *                                           Z535.6 — not itself a
+ *                                           Z535.1 hazard color)
+ *
+ * Colors are hard-coded rather than theme variables and are NOT
+ * overridden under [data-theme='dark'] — a safety signal word's color
+ * is fixed by the standard, not by the site's color scheme.
+ */
+
+.alert {
+  margin: 1.5rem 0;
+  border: 3px solid #000;
+  border-radius: 0;
+  overflow: hidden;
+  font-family: var(--ifm-font-family-base, sans-serif);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  /* Keep the panel colors when the page is printed / exported to PDF —
+     browsers drop background colors by default. */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  break-inside: avoid;
+}
+
+.signalPanel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--z535-panel-bg);
+  color: var(--z535-panel-fg);
+}
+
+.signalWord {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+/* Z535.4: the safety alert symbol is at least as tall as the signal
+   word's letters. Sized in em so it scales with the signal word. */
+.symbol {
+  flex: 0 0 auto;
+  width: 1.55em;
+  height: 1.35em;
+  font-size: 1.05rem;
+}
+
+/* Exclamation mark is drawn in the panel background color so it reads
+   as a cut-out of the solid triangle. */
+.symbolMark {
+  fill: var(--z535-panel-bg);
+}
+
+/* The message panel is always black-on-white, so pin the Infima
+   variables that nested content (headings, links, code, tables) would
+   otherwise pick up from the site's dark theme and render unreadably. */
+.messagePanel {
+  background: #fff;
+  color: #000;
+  padding: 0.75rem 1rem;
+  line-height: 1.5;
+  --ifm-font-color-base: #000;
+  --ifm-heading-color: #000;
+  --ifm-color-content: #000;
+  --ifm-link-color: #00449e;
+  --ifm-link-hover-color: #002a63;
+  --ifm-code-background: #f2f2f2;
+  --ifm-table-border-color: #000;
+}
+
+.messagePanel > :last-child,
+.messagePanel > .part:last-child > :last-child {
+  margin-bottom: 0;
+}
+
+.part {
+  margin: 0 0 0.5em;
+}
+
+/* MDX may wrap a part's text in <p>; keep it on the label's line. */
+.part > p {
+  display: inline;
+}
+
+.partLabel {
+  font-weight: 700;
+}
+
+/* ---- Signal-word panel colors, one block per signal word ---- */
+
+/* DANGER: white letters on safety red. */
+.danger {
+  --z535-panel-bg: #bd2024;
+  --z535-panel-fg: #fff;
+}
+
+/* WARNING: black letters on safety orange. */
+.warning {
+  --z535-panel-bg: #ff7900;
+  --z535-panel-fg: #000;
+}
+
+/* CAUTION: black letters on safety yellow. */
+.caution {
+  --z535-panel-bg: #ffe100;
+  --z535-panel-fg: #000;
+}
+
+/* NOTICE: white italic letters on safety blue, no safety alert symbol. */
+.notice {
+  --z535-panel-bg: #004488;
+  --z535-panel-fg: #fff;
+}
+
+.notice .signalWord {
+  font-style: italic;
+}
